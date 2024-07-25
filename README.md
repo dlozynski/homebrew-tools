@@ -1,4 +1,11 @@
-# Unofficial tap for Input Leap
+# Homebrew tap
+
+## List of tools
+* Input-leap (Unofficial)
+* Synergy-Core (Unofficial)
+
+
+## Input-leap
 
 > [!WARNING]
 > This formula is currently not intended to be run on Linux and will likely
@@ -26,13 +33,13 @@ application on MacOS.
 
 * MacOS Sierra minimum.
 * You have to have [XCode](https://developer.apple.com/xcode/) installed (not
-  just the command-line tools. Homebrew will also remind you of this). 
+  just the command-line tools. Homebrew will also remind you of this).
 
 All other dependencies are handled by Homebrew itself in the formula.
 
 ## Installing
 
-Run `brew tap vancluever/input-leap` and then `brew install input-leap`.
+Run `brew tap dlozynski/tools` and then `brew install input-leap`.
 
 ## Caveats
 
