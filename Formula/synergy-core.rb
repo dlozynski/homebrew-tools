@@ -34,6 +34,7 @@ class SynergyCore < Formula
   depends_on "openssl@3"
   depends_on "pugixml"
   depends_on "python"
+  depends_on "qt"
 
   on_linux do
     depends_on "pkg-config" => :build
@@ -55,7 +56,6 @@ class SynergyCore < Formula
 
   def install
 
-    system "python", "scripts/install_deps.py"
     system "cmake", "-B", "build", "--preset=", "macos-release", "-DBUILD_TESTS:BOOL=OFF", "-DCMAKE_INSTALL_DO_STRIP=1", "-DSYSTEM_PUGIXML:BOOL=ON"
     system "cmake", "--build", "build", "-j8"
     system "cmake", "--install", "build"
