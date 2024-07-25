@@ -1,4 +1,4 @@
-# Unofficial tap for Input Leap
+# Unofficial tap
 
 > [!WARNING]
 > This formula is currently not intended to be run on Linux and will likely
@@ -32,7 +32,7 @@ All other dependencies are handled by Homebrew itself in the formula.
 
 ## Installing
 
-Run `brew tap vancluever/input-leap` and then `brew install input-leap`.
+Run `brew tap dlozynski/tools` and then `brew install input-leap`.
 
 ## Caveats
 
