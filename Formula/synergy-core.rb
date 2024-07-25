@@ -30,21 +30,10 @@ class SynergyCore < Formula
     strategy :github_latest
   end
 
-  bottle do
-    rebuild 1
-    # sha256                               arm64_sonoma:   "8e21d500ed1567182b5b123a76f6e576a39b09c773ede9612cd11626e57a13fd"
-    # sha256                               arm64_ventura:  "4b21f477ede4756031bcebf1acb32542d0602c12afd1b2087774ea4cf6ad0bcd"
-    # sha256                               arm64_monterey: "101739d8739aa9b5de4d17f7ce4fc1f4922928c155b740fc3391e9b57838418e"
-    # sha256                               sonoma:         "b8481a8fc33f66b7819ea6aa2fd00683db248742b4e271f55352371e1d1c9de3"
-    # sha256                               ventura:        "e4ccf938d38c07196b39c59f71feb422c1a950ce1dea9b5577aac062580a87f1"
-    # sha256                               monterey:       "7e18aa9801410561452da1503ee9e0a7b987086ff4f2603bb4bce7bf9c4fc4f1"
-    # sha256 cellar: :any_skip_relocation, x86_64_linux:   "0b80be1af6d257aea32a7c8533fd7e7254832f6c05a2e706633e39a81e096a6b"
-  end
-
   depends_on "cmake" => :build
   depends_on "openssl@3"
   depends_on "pugixml"
-  depends_on "qt@5"
+  depends_on "python"
 
   on_linux do
     depends_on "pkg-config" => :build
@@ -65,21 +54,10 @@ class SynergyCore < Formula
   end
 
   def install
-    # Use the standard brew installation path.
-    inreplace "CMakeLists.txt",
-              "set (SYNERGY_BUNDLE_DIR ${CMAKE_BINARY_DIR}/bundle)",
-              "set (SYNERGY_BUNDLE_DIR ${CMAKE_INSTALL_PREFIX}/bundle)"
 
-    # Disable macdeployqt to prevent copying dylibs
-    inreplace "src/gui/CMakeLists.txt",
-              /"execute_process\(COMMAND \${MACDEPLOYQT_EXECUTABLE}.*\)"\)$/,
-              '"MESSAGE (\\"Skipping macdeployqt in Homebrew\\")")'
-
-    system "cmake", "-S", ".", "-B", "build", *std_cmake_args,
-                    "-DBUILD_TESTS:BOOL=OFF", "-DCMAKE_INSTALL_DO_STRIP=1",
-                    "-DSYSTEM_PUGIXML:BOOL=ON"
-
-    system "cmake", "--build", "build"
+    system "python", "scripts/install_deps.py"
+    system "cmake", "-B", "build", "--preset=", "macos-release", "-DBUILD_TESTS:BOOL=OFF", "-DCMAKE_INSTALL_DO_STRIP=1", "-DSYSTEM_PUGIXML:BOOL=ON"
+    system "cmake", "--build", "build", "-j8"
     system "cmake", "--install", "build"
 
     if OS.mac?
