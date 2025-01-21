@@ -22,10 +22,10 @@ class InputLeap < Formula
     system "cmake -S. -Bbuild"
     system "cmake --build build"
     system "codesign", "--deep", "--force", "--sign", "-", "build/bundle/InputLeap.app"
-    prefix.install "build/bundle/InputLeap.app"
+    prefix.install "/Applications/InputLeap.app"
     system "cp -pR build/bundle/InputLeap.app /Applications/"
-    bin.install_symlink prefix/"InputLeap.app/Contents/MacOS/input-leapc"
-    bin.install_symlink prefix/"InputLeap.app/Contents/MacOS/input-leaps"
+    bin.install_symlink prefix"/Contents/MacOS/input-leapc"
+    bin.install_symlink prefix"/Contents/MacOS/input-leaps"
     man.mkpath
     man1.install "doc/input-leapc.1"
     man1.install "doc/input-leaps.1"
