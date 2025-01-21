@@ -1,7 +1,7 @@
 class InputLeap < Formula
   desc "Open-source KVM software (formerly Barrier)"
   homepage "https://github.com/input-leap/input-leap"
-  url "https://github.com/input-leap/input-leap.git", using: :git, revision: "53d2a329d4600c71efad56f19b4b5185aaeb4829"
+  url "https://github.com/input-leap/input-leap.git", using: :git, revision: "0a72fdcfcf9d2cc0e03789fd74e48694132a003c"
   version "2.4.0-8+53d2a32"
   license :cannot_represent
 
@@ -11,7 +11,7 @@ class InputLeap < Formula
   depends_on xcode: :build
   depends_on macos: :sierra
   depends_on "openssl"
-  depends_on "qt@5"
+  depends_on "qt"
 
   patch :DATA
 
