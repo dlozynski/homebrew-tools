@@ -63,32 +63,3 @@ class InputLeap < Formula
     system "false"
   end
 end
-
-__END__
-diff --git a/dist/macos/bundle/build_dist.sh.in b/dist/macos/bundle/build_dist.sh.in
-index 55610614..7ac2a247 100755
---- a/dist/macos/bundle/build_dist.sh.in
-+++ b/dist/macos/bundle/build_dist.sh.in
-@@ -37,19 +37,6 @@ cp -r "$B_BINDIR" "$B_MACOS" || exit 1
- 
- DEPLOYQT=@QT_DEPLOY_TOOL@
- 
--# Use macdeployqt to include libraries and create dmg
--if [ "$B_BUILDTYPE" = "Release" ]; then
--    info "Building Release disk image (dmg)"
--    "$DEPLOYQT" InputLeap.app -dmg \
--    -executable="$B_INPUTLEAPC" \
--    -executable="$B_INPUTLEAPS" || exit 1
--    mv "InputLeap.dmg" "InputLeap-$B_VERSION.dmg" || exit 1
--    success "Created InputLeap-$B_VERSION.dmg"
--else
--    warn "Disk image (dmg) only created for Release builds"
--    info "Building debug bundle"
--    "$DEPLOYQT" InputLeap.app -no-strip \
--    -executable="$B_INPUTLEAPC" \
--    -executable="$B_INPUTLEAPS" || exit 1
--    success "Bundle created successfully"
--fi
-+info "Building app bundle"
-+"$DEPLOYQT" InputLeap.app -executable="$B_INPUTLEAPC" -executable="$B_INPUTLEAPS" || exit 1
-+success "Bundle created successfully"
