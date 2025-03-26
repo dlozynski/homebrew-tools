@@ -1,15 +1,13 @@
 cask "kodi@nightly" do
 
-  version "master"
+  # Update those values
+  version "20250325-71734296"
   sha256 :no_check
   arch arm: "arm64", intel: "x86_64"
 
   @@os="osx"
   @@extension="dmg"
   @@build_number="00000"
-  # Update those values
-  @@date="20250325"
-  @@revision="71734296"
 
   on_macos do
     @@extension="dmg"
@@ -24,8 +22,8 @@ cask "kodi@nightly" do
     end
   end
 
-  url "https://mirrors.kodi.tv/nightlies/osx/#{arch}/#{version}/kodi-#{@@date}-#{@@revision}-#{version}-#{@@build_number}-#{arch}.#{@@extension}"
-  
+  url "https://mirrors.kodi.tv/nightlies/osx/#{arch}/master/kodi-#{version}-master-#{@@build_number}-#{arch}.#{@@extension}"
+
   name "Kodi Nightly"
   desc "Free and open-source media player"
   homepage "https://kodi.tv/"
@@ -33,8 +31,8 @@ cask "kodi@nightly" do
   # The regex below assumes that the release name will always be one word
   # (e.g., Leia, Matrix, Nexus, Omega, etc.).
   livecheck do
-    url "https://mirrors.kodi.tv/nightlies/osx/#{arch}/#{version}/"
-    regex(/href=.*?kodi[._-](\d+)[._-](\d+)[._-]master[._-](\d+)[._-]x86_64\.dmg/i)
+    url "https://mirrors.kodi.tv/nightlies/osx/#{arch}/master/"
+    regex(/href=.*?kodi[._-]((\d+)[._-](\d+))[._-]master[._-](\d+)[._-]x86_64\.dmg/i)
   end
 
   depends_on macos: ">= :mojave"
@@ -42,7 +40,7 @@ cask "kodi@nightly" do
   app "Kodi.app"
 
   # No trashing for user data for nightly builds
-  #"~/Library/Application Support/Kodi",  
+  #"~/Library/Application Support/Kodi",
   zap trash: [
     "~/.kodi",
     "~/Library/Logs/kodi.log",
