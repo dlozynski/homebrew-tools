@@ -1,4 +1,5 @@
 cask "kodi@nightly" do
+
   version "master"
   sha256 :no_check
   arch arm: "arm64", intel: "x86_64"
