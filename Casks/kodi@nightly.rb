@@ -41,9 +41,10 @@ cask "kodi@nightly" do
 
   app "Kodi.app"
 
+  # No trashing for user data for nightly builds
+  #"~/Library/Application Support/Kodi",  
   zap trash: [
     "~/.kodi",
-    "~/Library/Application Support/Kodi",
     "~/Library/Logs/kodi.log",
     "~/Library/Logs/kodi.old.log",
     "~/Library/Preferences/org.xbmc.kodi.plist",
