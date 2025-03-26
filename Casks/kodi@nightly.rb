@@ -34,7 +34,7 @@ cask "kodi@nightly" do
   # (e.g., Leia, Matrix, Nexus, Omega, etc.).
   livecheck do
     url "https://mirrors.kodi.tv/nightlies/osx/#{arch}/#{version}/"
-    regex(/href=.*?kodi[._-]\d+?[._-]\d+?-#{version}[._-]\d+?-#{arch}\.dmg/i)
+    regex(/href=.*?kodi[._-](\d+)[._-](\d+)[._-]master[._-](\d+)[._-]x86_64\.dmg/i)
   end
 
   depends_on macos: ">= :mojave"
