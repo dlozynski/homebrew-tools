@@ -6,17 +6,20 @@ cask "kodi@nightly" do
 
   @@os="osx"
   @@extension="dmg"
-  @@date="20250323"
-  @@revision="bad97449"
-  @@build_number="37818"
+  @@build_number="00000"
+  # Update those values
+  @@date="20250325"
+  @@revision="71734296"
 
   on_macos do
     @@extension="dmg"
     @os="osx"
     if Hardware::CPU.arm?
+      # Update this value
       @@build_number="8126"
     end
     if Hardware::CPU.intel?
+      # Update this value
       @@build_number="37850"
     end
   end
