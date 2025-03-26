@@ -4,11 +4,11 @@ cask "kodi@nightly" do
   sha256 :no_check
   arch arm: "arm64", intel: "x86_64"
 
-  @@revision="71734296"
-  @@date="20250325"
   @@os="osx"
-  @@build_number="00000"
   @@extension="dmg"
+  @@date="20250323"
+  @@revision="bad97449"
+  @@build_number="37818"
 
   on_macos do
     @@extension="dmg"
