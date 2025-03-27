@@ -1,28 +1,17 @@
 cask "kodi@nightly" do
 
-  # Update those values
-  version "20250325-71734296"
   sha256 :no_check
   arch arm: "arm64", intel: "x86_64"
+  folder = on_arch_conditional arm: "arm64", intel: "x86_64"
 
-  @@os="osx"
-  @@extension="dmg"
-  @@build_number="00000"
-
-  on_macos do
-    @@extension="dmg"
-    @os="osx"
-    if Hardware::CPU.arm?
-      # Update this value
-      @@build_number="8126"
-    end
-    if Hardware::CPU.intel?
-      # Update this value
-      @@build_number="37850"
-    end
+  on_intel do
+    version "20250325-71734296,37850"
+  end
+  on_arm do
+    version "20250325-71734296,8126"
   end
 
-  url "https://mirrors.kodi.tv/nightlies/osx/#{arch}/master/kodi-#{version}-master-#{@@build_number}-#{arch}.#{@@extension}"
+  url "https://mirrors.kodi.tv/nightlies/osx/#{folder}/master/kodi-#{version.csv.first}-master-#{version.csv.second}-#{arch}.dmg"
 
   name "Kodi Nightly"
   desc "Free and open-source media player"
@@ -32,7 +21,13 @@ cask "kodi@nightly" do
   # (e.g., Leia, Matrix, Nexus, Omega, etc.).
   livecheck do
     url "https://mirrors.kodi.tv/nightlies/osx/#{arch}/master/"
-    regex(/href=.*?kodi[._-]((\d+)[._-](\d+))[._-]master[._-](\d+)[._-]x86_64\.dmg/i)
+    regex(/href=.*?kodi[._-](\d+[._-]\d+)[._-]master[._-](\d+)[._-]x86_64\.dmg/i)
+    strategy :page_match do |page, regex|
+    match = page.match(regex)
+    next if match.blank?
+
+    "#{match[1]},#{match[2]}"
+  end
   end
 
   depends_on macos: ">= :mojave"
