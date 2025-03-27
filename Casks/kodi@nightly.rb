@@ -1,18 +1,17 @@
 cask "kodi@nightly" do
-
-  sha256 :no_check
   arch arm: "arm64", intel: "x86_64"
   folder = on_arch_conditional arm: "arm64", intel: "x86_64"
 
-  on_intel do
-    version "20250325-71734296,37850"
-  end
+  sha256 :no_check
+
   on_arm do
-    version "20250325-71734296,8126"
+    version "20250327-b0d5ff6e,8144"
+  end
+  on_intel do
+    version "20250327-b0d5ff6e,37868"
   end
 
   url "https://mirrors.kodi.tv/nightlies/osx/#{folder}/master/kodi-#{version.csv.first}-master-#{version.csv.second}-#{arch}.dmg"
-
   name "Kodi Nightly"
   desc "Free and open-source media player"
   homepage "https://kodi.tv/"
@@ -23,11 +22,11 @@ cask "kodi@nightly" do
     url "https://mirrors.kodi.tv/nightlies/osx/#{arch}/master/"
     regex(/href=.*?kodi[._-](\d+[._-]\d+)[._-]master[._-](\d+)[._-]x86_64\.dmg/i)
     strategy :page_match do |page, regex|
-    match = page.match(regex)
-    next if match.blank?
+      match = page.match(regex)
+      next if match.blank?
 
-    "#{match[1]},#{match[2]}"
-  end
+      "#{match[1]},#{match[2]}"
+    end
   end
 
   depends_on macos: ">= :mojave"
@@ -35,7 +34,7 @@ cask "kodi@nightly" do
   app "Kodi.app"
 
   # No trashing for user data for nightly builds
-  #"~/Library/Application Support/Kodi",
+  # "~/Library/Application Support/Kodi",
   zap trash: [
     "~/.kodi",
     "~/Library/Logs/kodi.log",
