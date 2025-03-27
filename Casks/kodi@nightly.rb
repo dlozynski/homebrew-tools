@@ -20,7 +20,7 @@ cask "kodi@nightly" do
   # (e.g., Leia, Matrix, Nexus, Omega, etc.).
   livecheck do
     url "https://mirrors.kodi.tv/nightlies/osx/#{arch}/master/"
-    regex(/href=.*?kodi[._-](\d+[._-]\d+)[._-]master[._-](\d+)[._-]x86_64\.dmg/i)
+    regex(/href=.*?kodi[._-](\d+[._-]\w+)[._-]master[._-](\d+)[._-]#{arch}\.dmg/i)
     strategy :page_match do |page, regex|
       match = page.match(regex)
       next if match.blank?
