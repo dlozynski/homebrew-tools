@@ -9,23 +9,21 @@ class Albafetch < Formula
   license "MIT"
   head "https://github.com/alba4k/albafetch.git", branch: "master"
 
-  depends_on "meson" => :build
-
-  def install
-
-    system "meson", "setup", "build"
-    system "meson", "compile", "-C", "build"
-    system "meson", "install", "-C", "build"
-    
-  end
-
-  test do
-    assert_equal "albafetch - a system fetch utility (#{version})", pipe_output("#{bin}/albafetch -h | grep #{version}")
-  end
-
   livecheck do
     url :stable
     regex(/[^"' >]*?v?(\d+(?:\.\d+)+)[^"' >]*?/i)
     strategy :github_latest
+  end
+
+  depends_on "meson" => :build
+
+  def install
+    system "meson", "setup", "build"
+    system "meson", "compile", "-C", "build"
+    system "meson", "install", "-C", "build"
+  end
+
+  test do
+    assert_equal "albafetch - a system fetch utility (#{version})", pipe_output("#{bin}/albafetch -h | grep #{version}")
   end
 end
