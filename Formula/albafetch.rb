@@ -15,6 +15,7 @@ class Albafetch < Formula
   end
 
   depends_on "meson" => :build
+  depends_on "ninja" => :build
 
   def install
     system "meson", "setup", "build", *std_meson_args
