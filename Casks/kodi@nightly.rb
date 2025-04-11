@@ -5,10 +5,10 @@ cask "kodi@nightly" do
   sha256 :no_check
 
   on_arm do
-    version "20250407-2b54951f,8239"
+    version "20250411-4c3c11be,8264"
   end
   on_intel do
-    version "20250407-2b54951f,37962"
+    version "20250411-4c3c11be,37987"
   end
 
   url "https://mirrors.kodi.tv/nightlies/osx/#{folder}/master/kodi-#{version.csv.first}-master-#{version.csv.second}-#{arch}.dmg"
